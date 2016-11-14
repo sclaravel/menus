@@ -42,14 +42,14 @@ return [
 You can install the through composer command line.
 
 ```
-composer require pingpong/menus
+composer require sclaravel/menus dev-master
 ```
 
 After the package installed, add a new service provider to the `providers` array in `config/app.php` file.
 
 ```php
 'providers' => array(
-	'Pingpong\Menus\MenusServiceProvider'
+	Pingpong\Menus\MenusServiceProvider::class,
 ),
 ```
 
@@ -57,7 +57,7 @@ Add new alias for `Menu` facade to the `aliases` array at the same file.
 
 ```php
 'aliases' => array(
-	'Menu' => 'Pingpong\Menus\MenuFacade',
+	'Menu' => Pingpong\Menus\MenuFacade::class,
 )
 ```
 
