@@ -1,0 +1,36 @@
+{
+  "name": "sclaravel/menus",
+  "description": "Laravel Menus",
+  "keywords": [
+    "laravel",
+    "menus",
+    "pingpong",
+    "navigation",
+    "nav",
+    "bootstrap"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Pingpong Labs",
+      "email": "pingpong.labs@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/support": "~5.2.*",
+    "illuminate/config": "~5.2.*",
+    "illuminate/view": "~5.2.*",
+    "laravelcollective/html": "~5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4",
+    "mockery/mockery": "~0.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pingpong\\Menus\\": ""
+    }
+  },
+  "minimum-stability": "stable"
+}
