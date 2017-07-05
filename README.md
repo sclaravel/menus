@@ -42,7 +42,7 @@ return [
 You can install the through composer command line.
 
 ```
-composer require sclaravel/menus dev-master
+composer require sclaravel/menus
 ```
 
 After the package installed, add a new service provider to the `providers` array in `config/app.php` file.
