@@ -36,6 +36,7 @@ class MenuItem implements ArrayableContract
         'icon',
         'parent',
         'attributes',
+        'permissions',
         'active',
         'order',
         'hideWhen'
@@ -174,21 +175,22 @@ class MenuItem implements ArrayableContract
      *
      * @return array
      */
-    public function route($route, $title, $parameters = array(), $order = 0, $attributes = array())
+    public function route($route, $title, $parameters = array(), $order = 0, $attributes = array(), $permissions = array())
     {
-        if (func_num_args() == 4) {
+        if (func_num_args() >= 4) {
             $arguments = func_get_args();
 
             return $this->add([
                 'route' => [array_get($arguments, 0), array_get($arguments, 2)],
                 'title' => array_get($arguments, 1),
-                'attributes' => array_get($arguments, 3)
+                'attributes' => array_get($arguments, 3),
+                'permissions' => array_get($arguments, 5)
             ]);
         }
 
         $route = array($route, $parameters);
 
-        return $this->add(compact('route', 'title', 'order', 'attributes'));
+        return $this->add(compact('route', 'title', 'order', 'attributes', 'permissions'));
     }
 
     /**
@@ -359,6 +361,14 @@ class MenuItem implements ArrayableContract
 
         return HTML::attributes($attributes);
     }
+
+    /**
+     * Get parameter permissions
+    **/
+	public function getPermissions()
+	{
+		return $this->permissions;
+	}
 
     /**
      * Check is the current item divider.
