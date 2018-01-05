@@ -38,6 +38,7 @@ class MenuItem implements ArrayableContract
         'attributes',
         'permissions',
         'active',
+        'sub_active',
         'order',
         'hideWhen'
     );
@@ -175,22 +176,21 @@ class MenuItem implements ArrayableContract
      *
      * @return array
      */
-    public function route($route, $title, $parameters = array(), $order = 0, $attributes = array(), $permissions = array())
+    public function route($route, $title, $parameters = array(), $order = 0, $attributes = array())
     {
-        if (func_num_args() >= 4) {
+        if (func_num_args() == 4) {
             $arguments = func_get_args();
 
             return $this->add([
                 'route' => [array_get($arguments, 0), array_get($arguments, 2)],
                 'title' => array_get($arguments, 1),
                 'attributes' => array_get($arguments, 3),
-                'permissions' => array_get($arguments, 5)
             ]);
         }
 
         $route = array($route, $parameters);
 
-        return $this->add(compact('route', 'title', 'order', 'attributes', 'permissions'));
+        return $this->add(compact('route', 'title', 'order', 'attributes'));
     }
 
     /**
@@ -289,6 +289,33 @@ class MenuItem implements ArrayableContract
     {
         return $this->addHeader($title);
     }
+
+	public function addPermissions($permissions = [])
+	{
+		return $this->addAttributeProperties('permissions', $permissions);
+	}
+
+	/**
+	 * Chỉ định active cho những url không nằm trên menu
+	 *
+	 * @param $route_name array
+	 *
+	 * @return $this
+	 **/
+	public function subActive($route_name = [])
+	{
+		return $this->addAttributeProperties('sub_active', $route_name);
+	}
+
+	protected function addAttributeProperties($attribute, $value)
+	{
+		$properties = $this->getProperties();
+
+		$properties[$attribute] = $value;
+		$this->fill($properties);
+
+		return $this;
+	}
 
     /**
      * Get childs.
@@ -545,14 +572,20 @@ class MenuItem implements ArrayableContract
      *
      * @return bool
      */
-    protected function getActiveStateFromRoute()
-    {
-	    if (Request::route()->getName() == $this->route[0]) {
-		    return true;
-	    }
+	protected function getActiveStateFromRoute()
+	{
+		$request_route = Request::route()->getName();
 
-        return Request::is(str_replace(url('/').'/', '', $this->getUrl()));
-    }
+		if ($request_route == $this->route[0]) {
+			return true;
+		}
+
+		if ($this->sub_active && in_array($request_route, $this->sub_active)) {
+			return true;
+		}
+
+		return Request::is(str_replace(url('/').'/', '', $this->getUrl()));
+	}
 
     /**
      * Get active status using request url.
