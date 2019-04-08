@@ -2,6 +2,7 @@
 
 namespace TysonLaravel\Menus;
 
+use Collective\Html\HtmlBuilder;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +14,7 @@ class MenusServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $defer = true;
-
+    
     /**
      * Bootstrap the application events.
      */
@@ -22,7 +23,7 @@ class MenusServiceProvider extends ServiceProvider
         $this->registerNamespaces();
         $this->registerMenusFile();
     }
-
+    
     /**
      * Require the menus file if that file is exists.
      */
@@ -32,34 +33,36 @@ class MenusServiceProvider extends ServiceProvider
             require $file;
         }
     }
-
+    
     /**
      * Register the service provider.
      */
     public function register()
     {
         $this->registerHtmlPackage();
-
+        
         $this->app->singleton('menus', function ($app) {
             return new Menu($app['view'], $app['config']);
         });
+        
+        $this->app->alias('menus', Menu::class);
     }
-
+    
     /**
      * Register "iluminate/html" package.
      */
     protected function registerHtmlPackage()
     {
         $this->app->register('Collective\Html\HtmlServiceProvider');
-
+        
         $aliases = [
             'HTML' => 'Collective\Html\HtmlFacade',
             'Form' => 'Collective\Html\FormFacade',
         ];
-
+        
         AliasLoader::getInstance($aliases)->register();
     }
-
+    
     /**
      * Get the services provided by the provider.
      *
@@ -67,9 +70,9 @@ class MenusServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('menus');
+        return ['menus', Menu::class];
     }
-
+    
     /**
      * Register package's namespaces.
      */
@@ -77,13 +80,13 @@ class MenusServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/src/config/config.php', 'menus');
         $this->loadViewsFrom(__DIR__.'/src/views', 'menus');
-
+        
         $this->publishes([
             __DIR__.'/src/config/config.php' => config_path('menus.php'),
         ], 'config');
-
+        
         $this->publishes([
-            __DIR__.'/src/views' => base_path('resources/views/vendor/pingpong/menus'),
+            __DIR__.'/src/views' => base_path('resources/views/vendor/tysonlaravel/menus'),
         ], 'views');
     }
 }

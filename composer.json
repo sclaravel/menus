@@ -38,7 +38,7 @@
         "TysonLaravel\\Menus\\MenusServiceProvider"
       ],
       "aliases": {
-        "Menu": "TysonLaravel\\Menus\\MenuFacade"
+        "Menus": "TysonLaravel\\Menus\\MenuFacade"
       }
     }
   },
