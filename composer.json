@@ -29,7 +29,17 @@
   },
   "autoload": {
     "psr-4": {
-      "Pingpong\\Menus\\": ""
+      "TysonLaravel\\Menus\\": ""
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "TysonLaravel\\Menus\\MenusServiceProvider"
+      ],
+      "aliases": {
+        "Menu": "TysonLaravel\\Menus\\MenuFacade"
+      }
     }
   },
   "minimum-stability": "stable"

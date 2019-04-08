@@ -1,6 +1,6 @@
 <?php
 
-namespace Pingpong\Menus;
+namespace TysonLaravel\Menus;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pingpong\Menus\Presenters;
+namespace TysonLaravel\Menus\Presenters;
 
-use Pingpong\Menus\MenuItem;
+use TysonLaravel\Menus\MenuItem;
 
 abstract class Presenter implements PresenterInterface
 {
@@ -27,7 +27,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get menu tag without dropdown wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string
      */
@@ -47,7 +47,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get header dropdown tag wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string
      */
@@ -58,7 +58,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get menu tag with dropdown wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string
      */
@@ -69,7 +69,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get multi level dropdown menu wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string
      */
@@ -80,7 +80,7 @@ abstract class Presenter implements PresenterInterface
     /**
      * Get child menu items.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string
      */

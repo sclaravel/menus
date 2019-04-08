@@ -49,7 +49,7 @@ After the package installed, add a new service provider to the `providers` array
 
 ```php
 'providers' => array(
-	Pingpong\Menus\MenusServiceProvider::class,
+	TysonLaravel\Menus\MenusServiceProvider::class,
 ),
 ```
 
@@ -57,7 +57,7 @@ Add new alias for `Menu` facade to the `aliases` array at the same file.
 
 ```php
 'aliases' => array(
-	'Menu' => Pingpong\Menus\MenuFacade::class,
+	'Menu' => TysonLaravel\Menus\MenuFacade::class,
 )
 ```
 
@@ -92,7 +92,7 @@ Menu::make('navbar', function($menu)
 <a name="menu-item"></a>
 **Menu Item**
 
-As explained before, we can defining menu item in the callback by accessing `$menu` variable, which the variable is instance of `Pingpong\Menus\MenuBuilder` class.
+As explained before, we can defining menu item in the callback by accessing `$menu` variable, which the variable is instance of `TysonLaravel\Menus\MenuBuilder` class.
 
 To defining a plain URL, you can use `->url()` method.
 ```php
@@ -141,7 +141,7 @@ Menu::create('navbar', function($menu)
 <a name="menu-dropdown"></a>
 **Menu Dropdown**
 
-To create a dropdown menu, you can call to `->dropdown()` method and passing the first parameter by title of dropdown and the second parameter by closure callback that retrive `$sub` variable. The `$sub` variable is the the instance of `Pingpong\Menus\MenuItem` class.
+To create a dropdown menu, you can call to `->dropdown()` method and passing the first parameter by title of dropdown and the second parameter by closure callback that retrive `$sub` variable. The `$sub` variable is the the instance of `TysonLaravel\Menus\MenuItem` class.
 
 ```
 Menu::create('navbar', function($menu)
@@ -305,7 +305,7 @@ Or you can set which presenter to present the menu style via `->setPresenter()` 
 ```php
 Menu::create('navbar', function($menu)
 {
-	$menu->setPresenter('Pingpong\Menus\Presenters\Bootstrap\NavTabPresenter');
+	$menu->setPresenter('TysonLaravel\Menus\Presenters\Bootstrap\NavTabPresenter');
 });
 ```
 
@@ -314,7 +314,7 @@ You can also set which style of presenter when you rendering a menu.
 ```php
 Menu::render('navbar', 'navbar-right');
 
-Menu::render('navbar', 'Pingpong\Menus\Presenters\Bootstrap\NavPillsPresenter');
+Menu::render('navbar', 'TysonLaravel\Menus\Presenters\Bootstrap\NavPillsPresenter');
 ```
 
 <a name="available-presenter"></a>
@@ -322,22 +322,22 @@ Menu::render('navbar', 'Pingpong\Menus\Presenters\Bootstrap\NavPillsPresenter');
 
 | Name          | Presenter Class                                             |
 | ------------- |:------------------------------------------------------------|
-| `navbar`		| `Pingpong\Menus\Presenters\Bootstrap\NavbarPresenter`       |
-| `navbar-right`| `Pingpong\Menus\Presenters\Bootstrap\NavbarRightPresenter`  |
-| `nav-pills`	| `Pingpong\Menus\Presenters\Bootstrap\NavPillsPresenter`     |
-| `nav-tab`		| `Pingpong\Menus\Presenters\Bootstrap\NavTabPresenter`       |
-| `sidebar`     | `Pingpong\Menus\Presenters\Bootstrap\SidebarMenuPresenter`  |
-| `navmenu`     | `Pingpong\Menus\Presenters\Bootstrap\NavMenuPresenter`      |
+| `navbar`		| `TysonLaravel\Menus\Presenters\Bootstrap\NavbarPresenter`       |
+| `navbar-right`| `TysonLaravel\Menus\Presenters\Bootstrap\NavbarRightPresenter`  |
+| `nav-pills`	| `TysonLaravel\Menus\Presenters\Bootstrap\NavPillsPresenter`     |
+| `nav-tab`		| `TysonLaravel\Menus\Presenters\Bootstrap\NavTabPresenter`       |
+| `sidebar`     | `TysonLaravel\Menus\Presenters\Bootstrap\SidebarMenuPresenter`  |
+| `navmenu`     | `TysonLaravel\Menus\Presenters\Bootstrap\NavMenuPresenter`      |
 
 <a name="make-a-custom-presenter"></a>
 **Make A Costum Presenter**
 
-You can create your own presenter class. Make sure your presenter is extends to `Pingpong\Menus\Presenters\Presenter` and `implements` to 'Pingpong\Menus\Presenters\PresenterInterface'.
+You can create your own presenter class. Make sure your presenter is extends to `TysonLaravel\Menus\Presenters\Presenter` and `implements` to 'TysonLaravel\Menus\Presenters\PresenterInterface'.
 
 For example, this is `zurb-top-bar` presenter. 
 
 ```php
-use Pingpong\Menus\Presenters\Presenter;
+use TysonLaravel\Menus\Presenters\Presenter;
 
 class ZurbTopBarPresenter extends Presenter
 {
@@ -415,10 +415,10 @@ Menu style is like an alias to a presenter. You can register your style from you
 
 ```php
 return array(
-	'navbar'		=>	'Pingpong\Menus\Presenters\Bootstrap\NavbarPresenter',
-	'navbar-right'	=>	'Pingpong\Menus\Presenters\Bootstrap\NavbarRightPresenter',
-	'nav-pills'		=>	'Pingpong\Menus\Presenters\Bootstrap\NavPillsPresenter',
-	'nav-tab'		=>	'Pingpong\Menus\Presenters\Bootstrap\NavTabPresenter',
+	'navbar'		=>	'TysonLaravel\Menus\Presenters\Bootstrap\NavbarPresenter',
+	'navbar-right'	=>	'TysonLaravel\Menus\Presenters\Bootstrap\NavbarRightPresenter',
+	'nav-pills'		=>	'TysonLaravel\Menus\Presenters\Bootstrap\NavPillsPresenter',
+	'nav-tab'		=>	'TysonLaravel\Menus\Presenters\Bootstrap\NavTabPresenter',
 
 	'zurb-top-bar'	=>	'ZurbTopBarPresenter',
 );
@@ -503,7 +503,7 @@ $menu->route('settings', 'Settings');
 <a name="finding-menu-item"></a>
 ### Finding Menu Item
 
-To find menu item, you can use `findBy` method from `Pingpong\Menus\MenuBuilder` class.
+To find menu item, you can use `findBy` method from `TysonLaravel\Menus\MenuBuilder` class.
 
 ```
 $menu = Menu::instance('sidebar');

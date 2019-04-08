@@ -1,6 +1,6 @@
 <?php
 
-namespace Pingpong\Menus;
+namespace TysonLaravel\Menus;
 
 use Closure;
 use Illuminate\Contracts\Support\Arrayable as ArrayableContract;

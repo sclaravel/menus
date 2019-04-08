@@ -1,8 +1,8 @@
 <?php
 
-namespace Pingpong\Menus\Presenters\Bootstrap;
+namespace TysonLaravel\Menus\Presenters\Bootstrap;
 
-use Pingpong\Menus\Presenters\Presenter;
+use TysonLaravel\Menus\Presenters\Presenter;
 
 class SidebarMenuPresenter extends Presenter
 {
@@ -29,7 +29,7 @@ class SidebarMenuPresenter extends Presenter
     /**
      * Get menu tag without dropdown wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string
      */
@@ -103,7 +103,7 @@ class SidebarMenuPresenter extends Presenter
     /**
      * Get multilevel menu wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string`
      */

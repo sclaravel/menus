@@ -1,6 +1,6 @@
 <?php
 
-namespace Pingpong\Menus\Presenters\Bootstrap;
+namespace TysonLaravel\Menus\Presenters\Bootstrap;
 
 class NavbarRightPresenter extends NavbarPresenter
 {

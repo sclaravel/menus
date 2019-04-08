@@ -1,6 +1,6 @@
 <?php
 
-namespace Pingpong\Menus\Presenters\Bootstrap;
+namespace TysonLaravel\Menus\Presenters\Bootstrap;
 
 class NavMenuPresenter extends NavbarPresenter
 {
@@ -32,7 +32,7 @@ class NavMenuPresenter extends NavbarPresenter
     /**
      * Get multilevel menu wrapper.
      *
-     * @param \Pingpong\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\MenuItem $item
      *
      * @return string`
      */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pingpong\Menus;
+namespace TysonLaravel\Menus;
 
 use Closure;
 use Countable;
@@ -34,7 +34,7 @@ class Menu implements Countable
      * @param string $name
      * @param Closure $callback
      *
-     * @return \Pingpong\Menus\MenuBuilder
+     * @return \TysonLaravel\Menus\MenuBuilder
      */
     public function make($name, \Closure $callback)
     {
@@ -47,7 +47,7 @@ class Menu implements Countable
      * @param string   $name
      * @param Callable $resolver
      *
-     * @return \Pingpong\Menus\MenuBuilder
+     * @return \TysonLaravel\Menus\MenuBuilder
      */
     public function create($name, Closure $resolver)
     {

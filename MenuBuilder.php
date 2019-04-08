@@ -1,6 +1,6 @@
 <?php
 
-namespace Pingpong\Menus;
+namespace TysonLaravel\Menus;
 
 use Countable;
 use Illuminate\Config\Repository;
@@ -27,7 +27,7 @@ class MenuBuilder implements Countable
      *
      * @var string
      */
-    protected $presenter = 'Pingpong\Menus\Presenters\Bootstrap\NavbarPresenter';
+    protected $presenter = 'TysonLaravel\Menus\Presenters\Bootstrap\NavbarPresenter';
 
     /**
      * Style name for each presenter.
@@ -115,7 +115,7 @@ class MenuBuilder implements Countable
      *
      * @param  string $key
      * @param  string $value
-     * @return \Pingpong\Menus\MenuItem
+     * @return \TysonLaravel\Menus\MenuItem
      */
     public function findBy($key, $value)
     {
@@ -189,7 +189,7 @@ class MenuBuilder implements Countable
     /**
      * Get presenter instance.
      *
-     * @return \Pingpong\Menus\Presenters\PresenterInterface
+     * @return \TysonLaravel\Menus\Presenters\PresenterInterface
      */
     public function getPresenter()
     {
@@ -315,7 +315,7 @@ class MenuBuilder implements Countable
      *
      * @param array $attributes
      *
-     * @return \Pingpong\Menus\MenuItem
+     * @return \TysonLaravel\Menus\MenuItem
      */
     public function add(array $attributes = array())
     {
@@ -438,7 +438,7 @@ class MenuBuilder implements Countable
      * Add new divider item.
      *
      * @param int $order
-     * @return \Pingpong\Menus\MenuItem
+     * @return \TysonLaravel\Menus\MenuItem
      */
     public function addDivider($order = null)
     {
@@ -450,7 +450,7 @@ class MenuBuilder implements Countable
     /**
      * Add new header item.
      *
-     * @return \Pingpong\Menus\MenuItem
+     * @return \TysonLaravel\Menus\MenuItem
      */
     public function addHeader($title, $order = null)
     {
