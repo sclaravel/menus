@@ -3,7 +3,6 @@
 namespace TysonLaravel\Menus;
 
 use Illuminate\Support\ServiceProvider;
-use TysonLaravel\Menus\Menu;
 
 class MenusServiceProvider extends ServiceProvider
 {
@@ -13,6 +12,13 @@ class MenusServiceProvider extends ServiceProvider
      * @var bool
      */
     protected bool $defer = true;
+
+    /**
+     * Required config menus
+     *
+     * @var bool
+     */
+    protected $bootedAppMenu = false;
 
     /**
      * Bootstrap the application events.
@@ -44,10 +50,17 @@ class MenusServiceProvider extends ServiceProvider
 
     /**
      * Require the menus file if that file is exists.
+     *
+     * @return bool|void
      */
     public function registerMenusFile()
     {
-        if (file_exists($file = config_path('menu_list.php'))) {
+        if (request()->expectsJson()) {
+            return true;
+        }
+
+        $menuFiles = glob(app_path('Menus/*.php'));
+        foreach ($menuFiles as $file) {
             require $file;
         }
     }

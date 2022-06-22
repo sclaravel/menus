@@ -47,11 +47,11 @@ class Menu implements Countable
      * @param string $name
      * @param Callable $resolver
      *
-     * @return \TysonLaravel\Menus\MenuBuilder
+     * @return \TysonLaravel\Menus\Builder
      */
     public function create($name, Closure $resolver)
     {
-        $builder = new MenuBuilder($name, $this->config);
+        $builder = new Builder($name, $this->config);
 
         $builder->setViewFactory($this->views);
 

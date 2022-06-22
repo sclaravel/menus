@@ -1,4 +1,5 @@
 <?php
+namespace TysonLaravel\Menus\Presenters;
 
 interface PresenterInterface
 {
