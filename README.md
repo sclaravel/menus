@@ -1,9 +1,9 @@
 # Laravel Menus
 
-- [Upgrades](#upgrades)
 - [Installation](#installation)
 - [Creating A Menu](#creating-a-menu)
     - [Menu Item](#menu-item)
+    - [Menu Attributes](#menu-attributes)
     - [Menu Dropdown](#menu-dropdown)
     - [Menu Dropdown Milti Level](#menu-dropdown-multi-level)
     - [Menu Divider](#menu-divider)
@@ -21,20 +21,7 @@
     - [Menu Instance](#menu-instance)
     - [Finding Menu Item](#finding-menu-item)
     - [Modifying Menu](#modifying-menu)
-
-<a name="upgrades"></a>
-## Upgrades
-
-#### **To 2.0.10**
-
-- Add new `ordering` config key in your `config/menus.php` file and set the value to false.
-
-````
-return [
-	// --more code here--
-	'ordering' => false
-];
-```
+- [Set sub-active](#subactive-menu)
 
 <a name="installation"></a>
 ## Installation
@@ -45,23 +32,7 @@ You can install the through composer command line.
 composer require sclaravel/menus
 ```
 
-After the package installed, add a new service provider to the `providers` array in `config/app.php` file.
-
-```php
-'providers' => array(
-	TysonLaravel\Menus\MenusServiceProvider::class,
-),
-```
-
-Add new alias for `Menu` facade to the `aliases` array at the same file.
-
-```php
-'aliases' => array(
-	'Menu' => TysonLaravel\Menus\MenuFacade::class,
-)
-```
-
-Then, publish package's assets by running:
+Publish package's assets by running:
 
 ```
 php artisan vendor:publish
@@ -70,21 +41,20 @@ php artisan vendor:publish
 <a name="creating-a-menu"></a>
 ## Creating A Menu
 
-You can define your menus in `app/Support/menus.php` file. That file will loaded automatically by this package.
+You can define your menus in `app/Menus/Left.php` file. That file will loaded automatically by this package.
 
-To create a menu, simply call the `create` method from `Menu` facade. The first parameter is the menu name and the second parameter is callback for defining menu items.
+To create a menu, simply call the `create` or `make` method from `Menu` facade. The first parameter is the menu name and the second parameter is 
+callback 
+for defining menu items.
 
 ```php
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	// define your menu items here
 });
 ````
 
-Since version 2.1.1, you may also create a menu via `make` method.
 ```
-Menu::make('navbar', function($menu)
-{
+Menu::make('navbar', function($menu) {
 	// define your menu items here
 });
 ```
@@ -92,21 +62,20 @@ Menu::make('navbar', function($menu)
 <a name="menu-item"></a>
 **Menu Item**
 
-As explained before, we can defining menu item in the callback by accessing `$menu` variable, which the variable is instance of `TysonLaravel\Menus\MenuBuilder` class.
+As explained before, we can defining menu item in the callback by accessing `$menu` variable, which the variable is instance of 
+`TysonLaravel\Menus\Builder` class.
 
 To defining a plain URL, you can use `->url()` method.
 ```php
-Menu::create('navbar', function($menu)
-{
-              // URL , Title,  Attributes
-	$menu->url('home', 'Home', ['target' => 'blank']);
+Menu::create('navbar', function($menu) {
+            // URL , Title,  Attributes
+  $menu->url('home', 'Home', ['target' => 'blank']);
 });
 ```
 
 If you have named route, you define the menu item by calling `->route()` method.
 ```php
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->route(
 		'users.show', // route name
 		'View Profile', // title
@@ -116,10 +85,10 @@ Menu::create('navbar', function($menu)
 });
 ```
 
+
 You can also defining the menu item via array by calling `->add()` method.
 ```php
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->add([
 		'url' => 'about',
 		'title' => 'About',
@@ -137,6 +106,13 @@ Menu::create('navbar', function($menu)
 	]);
 });
 ```
+<a name="menu-attibutes"></a>
+**Menu Attibutes**
+
+| Attibutes | Detail                                      |
+| ------------- |:------------------------------------------------------------|
+| `target`		|     |
+| `icon`		|     |
 
 <a name="menu-dropdown"></a>
 **Menu Dropdown**
@@ -144,8 +120,7 @@ Menu::create('navbar', function($menu)
 To create a dropdown menu, you can call to `->dropdown()` method and passing the first parameter by title of dropdown and the second parameter by closure callback that retrive `$sub` variable. The `$sub` variable is the the instance of `TysonLaravel\Menus\MenuItem` class.
 
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->url('/', 'Home');
 	$menu->dropdown('Settings', function ($sub) {
 		$sub->url('settings/account', 'Account');
@@ -180,8 +155,7 @@ Menu::create('navbar', function($menu)
 
 You may also define a divider for each menu item. You can divide between menu item by using `->divider()` method.
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->url('/', 'Home');
 	$menu->divider();
 	$menu->url('profile', 'Profile')
@@ -193,8 +167,7 @@ Menu::create('navbar', function($menu)
 
 You may also add a dropdown header for the specified menu item by using `->header()` method.
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->url('/', 'Home')
 	$menu->dropdown('Settings', function ($sub) {
 		$sub->header('ACCOUNT');
@@ -210,8 +183,7 @@ Menu::create('navbar', function($menu)
 
 You may order the menu by specify `order` parameter.
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	// url, title, order, attributes
 	$menu->url('/', 'Home', 1);
 	// url, title, route parameters, order, attributes
@@ -228,8 +200,7 @@ Menu::create('navbar', function($menu)
 
 You may also set the order value by calling `->order` method.
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->url('/', 'Home', ['icon' => 'fa fa-dashboard'])->order(1);
 	
 	$menu->route('/', 'About', ['user' => '1'], ['icon' => 'fa fa-user'])->order(2);
@@ -254,8 +225,7 @@ return [
 
 You may also enable or disable menu ordering for each menu via `->enableOrdering` and `->disableOrdering` method.
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	// disable menu ordering
 	$menu->enableOrdering();
 
@@ -270,16 +240,14 @@ Menu::create('navbar', function($menu)
 You can also create a lots of menu with different name and menu items.
 
 ```php
-Menu::create('menu1', function($menu)
-{
+Menu::create('menu1', function($menu) {
 
 	$menu->route('home', 'Home');
 
 	$menu->url('profile', 'Profile');
 });
 
-Menu::create('menu2', function($menu)
-{
+Menu::create('menu2', function($menu) {
 	$menu->route('home', 'Home');
 
 	$menu->url('profile', 'Profile');
@@ -294,8 +262,7 @@ This package included with some presenter classes that used for converting menu 
 You can apply the menu style via `->style()` method.
 
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->style('nav-pills');
 });
 ```
@@ -303,8 +270,7 @@ Menu::create('navbar', function($menu)
 Or you can set which presenter to present the menu style via `->setPresenter()` method.
 
 ```php
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->setPresenter('TysonLaravel\Menus\Presenters\Bootstrap\NavTabPresenter');
 });
 ```
@@ -339,8 +305,7 @@ For example, this is `zurb-top-bar` presenter.
 ```php
 use TysonLaravel\Menus\Presenters\Presenter;
 
-class ZurbTopBarPresenter extends Presenter
-{
+class ZurbTopBarPresenter extends Presenter {
 	/**
 	 * {@inheritdoc }
 	 */
@@ -402,8 +367,7 @@ class ZurbTopBarPresenter extends Presenter
 To use this costum presenter, you can use the `setPresenter` method.
 
 ```php
-Menu::create('zurb-top-bar', function($menu)
-{
+Menu::create('zurb-top-bar', function($menu) {
 	$menu->setPresenter('ZurbTopBarPresenter');
 });
 ```
@@ -427,8 +391,7 @@ return array(
 Now, you can use a style like this.
 
 ```php
-Menu::create('zurb-top-bar', function($menu)
-{
+Menu::create('zurb-top-bar', function($menu) {
 	$menu->style('zurb-top-bar');
 });
 ```
@@ -439,8 +402,7 @@ Menu::create('zurb-top-bar', function($menu)
 If you don't like to use presenter class, you use view presenter instead. We can set which view to present the menus by calling `->setView()` method.
 
 ```
-Menu::create('navbar', function($menu)
-{
+Menu::create('navbar', function($menu) {
 	$menu->setView('menus::default');
 });
 ```
@@ -522,8 +484,7 @@ $menu = Menu::instance('sidebar');
 
 $menu->url('profile', 'Profile');
 
-$menu->whereTitle('Profile', function ($sub)
-{
+$menu->whereTitle('Profile', function ($sub) {
 	$sub->url('foo', 'Foo');
 });
 
@@ -536,11 +497,22 @@ $menu->whereTitle('Profile', function ($sub)
 After we create a menu, maybe we need to add other additional menus. You may modifying menu via `->modify` method.
 
 ```
-Menu::modify('navbar', function($menu)
-{
+Menu::modify('navbar', function($menu) {
 	$menu->add([
 		'title' => 'Foo',
 		'url' => 'bar',
 	]);
+});
+```
+<a name="subactive-menu"></a>
+### Set active in sub menu
+
+Use ``->subActive(['routeName'])``
+
+```
+Menu::create('navbar', function($menu) {
+  $menu->dropdown('Settings', function ($sub) {
+    $sub->url('user-management', 'User management')->subActive(['edit-user', 'create-user']);
+  });
 });
 ```

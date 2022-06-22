@@ -1,10 +1,12 @@
 <?php
 
 namespace TysonLaravel\Menus;
+
 use Countable;
 use Illuminate\Config\Repository;
 use Illuminate\Support\Arr;
 use Illuminate\View\Factory as ViewFactory;
+
 class Builder implements Countable
 {
     /**
@@ -314,11 +316,11 @@ class Builder implements Countable
      *
      * @param array $attributes
      *
-     * @return \TysonLaravel\Menus\MenuItem
+     * @return \TysonLaravel\Menus\Item
      */
     public function add(array $attributes = array())
     {
-        $item = MenuItem::make($attributes);
+        $item = Item::make($attributes);
 
         $this->items[] = $item;
 
@@ -347,7 +349,7 @@ class Builder implements Countable
             $properties = compact('title', 'attributes');
         }
 
-        $item = MenuItem::make($properties);
+        $item = Item::make($properties);
 
         call_user_func($callback, $item);
 
@@ -380,7 +382,7 @@ class Builder implements Countable
 
         $route = array($route, $parameters);
 
-        $item = MenuItem::make(
+        $item = Item::make(
             compact('route', 'title', 'parameters', 'attributes', 'order')
         );
 
@@ -426,7 +428,7 @@ class Builder implements Countable
 
         $url = $this->formatUrl($url);
 
-        $item = MenuItem::make(compact('url', 'title', 'order', 'attributes'));
+        $item = Item::make(compact('url', 'title', 'order', 'attributes'));
 
         $this->items[] = $item;
 
@@ -437,11 +439,11 @@ class Builder implements Countable
      * Add new divider item.
      *
      * @param int $order
-     * @return \TysonLaravel\Menus\MenuItem
+     * @return \TysonLaravel\Menus\Item
      */
     public function addDivider($order = null)
     {
-        $this->items[] = new MenuItem(array('name' => 'divider', 'order' => $order));
+        $this->items[] = new Item(array('name' => 'divider', 'order' => $order));
 
         return $this;
     }
@@ -449,11 +451,11 @@ class Builder implements Countable
     /**
      * Add new header item.
      *
-     * @return \TysonLaravel\Menus\MenuItem
+     * @return \TysonLaravel\Menus\Item
      */
     public function addHeader($title, $order = null)
     {
-        $this->items[] = new MenuItem(array(
+        $this->items[] = new Item(array(
             'name' => 'header',
             'title' => $title,
             'order' => $order
