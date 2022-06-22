@@ -1,9 +1,5 @@
 <?php
 
-namespace TysonLaravel\Menus\Presenters;
-
-use TysonLaravel\Menus\MenuItem;
-
 interface PresenterInterface
 {
     /**
@@ -23,7 +19,7 @@ interface PresenterInterface
     /**
      * Get menu tag without dropdown wrapper.
      *
-     * @param \TysonLaravel\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\Item $item
      *
      * @return string
      */
@@ -39,7 +35,7 @@ interface PresenterInterface
     /**
      * Get divider tag wrapper.
      *
-     * @param \TysonLaravel\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\Item $item
      *
      * @return mixed
      */
@@ -48,7 +44,7 @@ interface PresenterInterface
     /**
      * Get menu tag with dropdown wrapper.
      *
-     * @param \TysonLaravel\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\Item $item
      *
      * @return string
      */
@@ -57,9 +53,9 @@ interface PresenterInterface
     /**
      * Get child menu items.
      *
-     * @param \TysonLaravel\Menus\MenuItem $item
+     * @param \TysonLaravel\Menus\Item $item
      *
      * @return string
      */
-    public function getChildMenuItems(MenuItem $item);
+    public function getChildItems(Item $item);
 }
