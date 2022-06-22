@@ -1,26 +1,26 @@
-# Laravel 5 Menus
+# Laravel Menus
 
 - [Upgrades](#upgrades)
 - [Installation](#installation)
 - [Creating A Menu](#creating-a-menu)
-  - [Menu Item](#menu-item)
-  - [Menu Dropdown](#menu-dropdown)
-  - [Menu Dropdown Milti Level](#menu-dropdown-multi-level)
-  - [Menu Divider](#menu-divider)
-  - [Dropdown Header](#dropdown-header)
-  - [Ordering Menu Item](#ordering-menu-item)
-  - [Make Lots of Menu](#make-lots-of-menu)
+    - [Menu Item](#menu-item)
+    - [Menu Dropdown](#menu-dropdown)
+    - [Menu Dropdown Milti Level](#menu-dropdown-multi-level)
+    - [Menu Divider](#menu-divider)
+    - [Dropdown Header](#dropdown-header)
+    - [Ordering Menu Item](#ordering-menu-item)
+    - [Make Lots of Menu](#make-lots-of-menu)
 - [Menu Presenter](#menu-presenter)
-  - [The Available Presenter](#available-presenter)
-  - [Make A Custom Presenter](#make-a-custom-presenter)
-  - [Register A New Menu Style](#register-a-menu-style)
+    - [The Available Presenter](#available-presenter)
+    - [Make A Custom Presenter](#make-a-custom-presenter)
+    - [Register A New Menu Style](#register-a-menu-style)
 - [View Presenter](#view-presenter)
-  - [The Available View Presenter](#available-view-presenter)
+    - [The Available View Presenter](#available-view-presenter)
 - [Rendering Menu](#rendering-menu)
 - [Menu Inheritance](#menu-inheritance)
-  - [Menu Instance](#menu-instance)
-  - [Finding Menu Item](#finding-menu-item)
-  - [Modifying Menu](#modifying-menu)
+    - [Menu Instance](#menu-instance)
+    - [Finding Menu Item](#finding-menu-item)
+    - [Modifying Menu](#modifying-menu)
 
 <a name="upgrades"></a>
 ## Upgrades
@@ -334,7 +334,7 @@ Menu::render('navbar', 'TysonLaravel\Menus\Presenters\Bootstrap\NavPillsPresente
 
 You can create your own presenter class. Make sure your presenter is extends to `TysonLaravel\Menus\Presenters\Presenter` and `implements` to 'TysonLaravel\Menus\Presenters\PresenterInterface'.
 
-For example, this is `zurb-top-bar` presenter. 
+For example, this is `zurb-top-bar` presenter.
 
 ```php
 use TysonLaravel\Menus\Presenters\Presenter;

@@ -1,13 +1,11 @@
 <?php
 
 namespace TysonLaravel\Menus;
-
 use Countable;
 use Illuminate\Config\Repository;
 use Illuminate\Support\Arr;
 use Illuminate\View\Factory as ViewFactory;
-
-class MenuBuilder implements Countable
+class Builder implements Countable
 {
     /**
      * Menu name.
@@ -342,10 +340,10 @@ class MenuBuilder implements Countable
 
         if (func_num_args() == 3) {
             $arguments = func_get_args();
-            
+
             $title = Arr::get($arguments, 0);
             $attributes = Arr::get($arguments, 2);
-            
+
             $properties = compact('title', 'attributes');
         }
 
@@ -427,7 +425,7 @@ class MenuBuilder implements Countable
         }
 
         $url = $this->formatUrl($url);
-        
+
         $item = MenuItem::make(compact('url', 'title', 'order', 'attributes'));
 
         $this->items[] = $item;
@@ -628,7 +626,7 @@ class MenuBuilder implements Countable
             if ($item->hidden()) {
                 continue;
             }
-            
+
             if ($item->hasSubMenu()) {
                 $menu .= $presenter->getMenuWithDropDownWrapper($item);
             } elseif ($item->isHeader()) {

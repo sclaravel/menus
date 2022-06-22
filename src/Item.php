@@ -8,7 +8,7 @@ use Collective\Html\HtmlFacade as HTML;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 
-class MenuItem implements ArrayableContract
+class Item implements ArrayableContract
 {
     /**
      * Array properties.
@@ -151,10 +151,10 @@ class MenuItem implements ArrayableContract
 
         if (func_num_args() == 3) {
             $arguments = func_get_args();
-            
+
             $title = Arr::get($arguments, 0);
             $attributes = Arr::get($arguments, 2);
-            
+
             $properties = compact('title', 'attributes');
         }
 
@@ -291,32 +291,32 @@ class MenuItem implements ArrayableContract
         return $this->addHeader($title);
     }
 
-	public function addPermissions($permissions = [])
-	{
-		return $this->addAttributeProperties('permissions', $permissions);
-	}
+    public function addPermissions($permissions = [])
+    {
+        return $this->addAttributeProperties('permissions', $permissions);
+    }
 
-	/**
-	 * Chỉ định active cho những url không nằm trên menu
-	 *
-	 * @param $route_name array
-	 *
-	 * @return $this
-	 **/
-	public function subActive($route_name = [])
-	{
-		return $this->addAttributeProperties('sub_active', $route_name);
-	}
+    /**
+     * Chỉ định active cho những url không nằm trên menu
+     *
+     * @param $route_name array
+     *
+     * @return $this
+     **/
+    public function subActive($route_name = [])
+    {
+        return $this->addAttributeProperties('sub_active', $route_name);
+    }
 
-	protected function addAttributeProperties($attribute, $value)
-	{
-		$properties = $this->getProperties();
+    protected function addAttributeProperties($attribute, $value)
+    {
+        $properties = $this->getProperties();
 
-		$properties[$attribute] = $value;
-		$this->fill($properties);
+        $properties[$attribute] = $value;
+        $this->fill($properties);
 
-		return $this;
-	}
+        return $this;
+    }
 
     /**
      * Get childs.
@@ -392,11 +392,11 @@ class MenuItem implements ArrayableContract
 
     /**
      * Get parameter permissions
-    **/
-	public function getPermissions()
-	{
-		return $this->permissions;
-	}
+     **/
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
 
     /**
      * Check is the current item divider.
@@ -573,20 +573,20 @@ class MenuItem implements ArrayableContract
      *
      * @return bool
      */
-	protected function getActiveStateFromRoute()
-	{
-		$request_route = Request::route()->getName();
+    protected function getActiveStateFromRoute()
+    {
+        $request_route = Request::route()->getName();
 
-		if ($request_route == $this->route[0]) {
-			return true;
-		}
+        if ($request_route == $this->route[0]) {
+            return true;
+        }
 
-		if ($this->sub_active && in_array($request_route, $this->sub_active)) {
-			return true;
-		}
+        if ($this->sub_active && in_array($request_route, $this->sub_active)) {
+            return true;
+        }
 
-		return Request::is(str_replace(url('/').'/', '', $this->getUrl()));
-	}
+        return Request::is(str_replace(url('/').'/', '', $this->getUrl()));
+    }
 
     /**
      * Get active status using request url.

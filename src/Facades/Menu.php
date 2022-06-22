@@ -1,10 +1,9 @@
 <?php
-
-namespace TysonLaravel\Menus;
+namespace TysonLaravel\Menus\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class MenuFacade extends Facade
+class Menu extends Facade
 {
     /**
      * Get the registered name of the component.
